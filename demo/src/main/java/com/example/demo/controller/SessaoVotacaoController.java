@@ -1,15 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.SessaoVotacaoService;
+import com.example.demo.vo.PautaVO;
 import com.example.demo.vo.SessaoVotacaoVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("sessaovotacao")
@@ -22,4 +21,5 @@ public class SessaoVotacaoController {
     public ResponseEntity<SessaoVotacaoVO> criarSessaoVotacao(@RequestBody @Valid SessaoVotacaoVO sessaoVotacaoVO) {
         return ResponseEntity.ok(sessaoVotacaoService.criarSessaoVotacao(sessaoVotacaoVO));
     }
+
 }

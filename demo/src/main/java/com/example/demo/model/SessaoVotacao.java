@@ -21,7 +21,7 @@ public class SessaoVotacao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinColumn(name = "pauta", referencedColumnName = "id")
     @NotNull(message = "A pauta não pode estar vazio")
     private Pauta pauta;

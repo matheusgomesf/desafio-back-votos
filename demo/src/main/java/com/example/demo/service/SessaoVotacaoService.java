@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Pauta;
+import com.example.demo.exception.PautaException;
 import com.example.demo.model.SessaoVotacao;
 import com.example.demo.repository.SessaoVotacaoRepository;
 import com.example.demo.vo.PautaVO;
@@ -10,7 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +31,13 @@ public class SessaoVotacaoService {
 
         PautaVO pautaVO = pautaService.findById(sessaoVotacaoVO.getPauta().getId());
 
+        if (Objects.nonNull(pautaVO.getSessaoVotacao())) {
+            throw new PautaException("Pauta já passui sessão");
+        }
+
         sessaoVotacaoVO.setHoraFim(sessaoVotacaoVO.getHoraInicio().plusMinutes(sessaoVotacaoVO.getDuracao()));
         sessaoVotacaoVO.setPauta(pautaVO);
-        SessaoVotacao sessaoVotacao = sessaoVotacaoRepository.save(modelMapper.map(sessaoVotacaoVO, SessaoVotacao.class));
+        sessaoVotacaoRepository.save(modelMapper.map(sessaoVotacaoVO, SessaoVotacao.class));
 
         return modelMapper.map(sessaoVotacaoVO, SessaoVotacaoVO.class);
     }
