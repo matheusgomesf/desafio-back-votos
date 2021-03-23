@@ -1,7 +1,6 @@
 package com.example.demo.vo;
 
 import com.example.demo.enums.TipoVoto;
-import com.example.demo.model.Associados;
 import com.example.demo.model.SessaoVotacao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,9 +18,9 @@ public class PautaVO {
     private Long id;
     @NotBlank(message = "O assunto da pauta não pode estar vazio")
     private String assunto;
-    private Integer votoSim;
-    private Integer votoNao;
+    private int votoSim;
+    private int votoNao;
     private TipoVoto resultado;
-    private List<Associados> votos;
+    private List<AssociadosVo> votos;
     private SessaoVotacao sessaoVotacao;
 }

@@ -69,4 +69,16 @@ public class DefaultExceptionHandler{
                 .build();
         return new ResponseEntity<>(validationExceptionDetails, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(PautaException.class)
+    public ResponseEntity<ExceptionDatails> handlerPautaException(PautaException exception) {
+        ExceptionDatails validationExceptionDetails = ExceptionDatails.builder()
+                .localDateTime(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .title("Pauta Exception")
+                .detail(exception.getLocalizedMessage())
+                .developerMessage(exception.getClass().getSimpleName())
+                .build();
+        return new ResponseEntity<>(validationExceptionDetails, HttpStatus.BAD_REQUEST);
+    }
 }

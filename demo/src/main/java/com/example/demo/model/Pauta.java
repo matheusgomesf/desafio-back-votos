@@ -27,12 +27,8 @@ public class Pauta implements Serializable {
     private Integer votoSim;
     private Integer votoNao;
     private TipoVoto resultado;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private List<Associados> votos;
-    @OneToOne(mappedBy = "pauta")
+    @OneToOne(mappedBy = "pauta", fetch = FetchType.LAZY)
     private SessaoVotacao sessaoVotacao;
-
-    public TipoVoto getResultados() {
-        return this.votoSim > this.votoNao ? TipoVoto.SIM : TipoVoto.NAO;
-    }
 }
